@@ -1,0 +1,44 @@
+plugins {
+    id 'java'
+}
+
+repositories {
+    mavenLocal()
+    maven {
+        url = 'https://repo.runelite.net'
+        content {
+            includeGroupByRegex 'net\\.runelite.*'
+        }
+    }
+    mavenCentral()
+}
+
+def runeLiteVersion = 'latest.release'
+
+dependencies {
+    compileOnly group: 'net.runelite', name: 'client', version: runeLiteVersion
+
+    testImplementation group: 'net.runelite', name: 'client', version: runeLiteVersion
+}
+
+group = 'com.mason'
+version = '1.17.0'
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_11
+    targetCompatibility = JavaVersion.VERSION_11
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
+    options.release.set(11)
+}
+
+tasks.register('run', JavaExec) {
+    group = 'runelite'
+    description = 'Runs RuneLite with Potion Timer Overlay loaded as a built-in development plugin.'
+    classpath = sourceSets.test.runtimeClasspath
+    mainClass = 'com.mason.divinepotiontimer.PotionTimerOverlayLauncher'
+    jvmArgs '-ea'
+    args '--developer-mode', '--debug'
+}
