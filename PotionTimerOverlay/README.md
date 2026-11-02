@@ -1,6 +1,6 @@
 # Potion Timer Overlay
 
-**Version 1.17.0**
+**Version 1.0**
 
 Potion Timer Overlay is a RuneLite plugin that helps you keep track of active potion effects and buffs while playing Old School RuneScape. It displays customizable countdown timers and visual indicators directly on your inventory items, making it easier to see when an effect is about to expire.
 
